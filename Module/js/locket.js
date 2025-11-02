@@ -9,7 +9,7 @@
   'use strict';
   
   // ========= Constants (Improved - Safe Changes Only) ========= //
-  const PURCHASE_DATE = "2025-11-01T00:00:00Z";       // ✅ Updated to recent date
+  const PURCHASE_DATE = "2025-07-18T00:00:00Z";       // ✅ Updated to recent date
   const EXPIRES_DATE = "2099-12-31T23:59:59Z";        // ✅ Extended & unified
   const PRODUCT_ID = "locket.premium.yearly";         // ⚠️ KEEP OLD - Working fine!
   
