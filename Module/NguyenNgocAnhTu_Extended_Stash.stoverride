@@ -1,0 +1,149 @@
+name: ⚡ Anh Tú Premium Extended - Stash
+desc: 11 Apps - Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Truecaller + Wink + Alight Motion + Documents + Vivacut
+author: Nguyễn Ngọc Anh Tú
+homepage: https://github.com/z3rokaze/NguyenNgocAnhTu
+icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+
+rules:
+  - AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
+  - AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
+
+http:
+  mitm:
+    - "*.googlevideo.com"
+    - "www.youtube.com"
+    - "s.youtube.com"
+    - "youtubei.googleapis.com"
+    - "spclient.wg.spotify.com"
+    - "*-spclient.spotify.com"
+    - "api.revenuecat.com"
+    - "api-mobile.soundcloud.com"
+    - "api.picsart.com"
+    - "premium*.truecaller.com"
+    - "api-sub.meitu.com"
+    - "us-central1-alight-creative.cloudfunctions.net"
+    - "license.pdfexpert.com"
+    - "medi.dxzzy321.top"
+  url-rewrite:
+    - ^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad - reject-200
+    - ^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads - reject-200
+    - ^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) - reject-200
+    - ^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext - reject-200
+    - (^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
+  script:
+    - match: ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence|get_watch)
+      name: yt-req
+      type: request
+      require-body: true
+      timeout: 20
+      max-size: 3145728
+      binary-mode: true
+    - match: ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
+      name: yt-res
+      type: response
+      require-body: true
+      timeout: 20
+      max-size: 3145728
+      binary-mode: true
+      argument: '{"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}'
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
+      name: sp-json
+      type: request
+      require-body: false
+      timeout: 15
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
+      name: sp-proto
+      type: response
+      require-body: true
+      timeout: 25
+      max-size: 0
+      binary-mode: true
+    - match: ^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$)
+      name: rc-multi-res
+      type: response
+      require-body: true
+      timeout: 15
+      max-size: 262144
+    - match: ^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers)
+      name: rc-multi-hdr
+      type: request
+      require-body: false
+      timeout: 5
+    - match: ^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios
+      name: sc-res
+      type: response
+      require-body: true
+      timeout: 15
+      max-size: 262144
+    - match: ^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$
+      name: pa-req
+      type: request
+      require-body: true
+      timeout: 10
+    - match: ^https:\/\/premium-(.+)\.truecaller\.com\/v\d\/(subscriptions|products\/apple)
+      name: tc-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 0
+    - match: ^https?:\/\/api-sub\.meitu\.com\/v2\/user\/vip_info_by_group\.json
+      name: wk-res
+      type: response
+      require-body: true
+      timeout: 10
+    - match: ^https:\/\/us-central1-alight-creative\.cloudfunctions\.net\/getAccountStatusAndLicenses$
+      name: am-res
+      type: response
+      require-body: true
+      timeout: 10
+    - match: ^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/documents\/subscription\/refresh
+      name: doc-req
+      type: request
+      require-body: true
+      timeout: 10
+    - match: ^https:\/\/medi\.dxzzy321\.top\/api\/rest\/commerce\/integrate\/vip\/perform$
+      name: vc-res
+      type: response
+      require-body: true
+      timeout: 10
+
+script-providers:
+  yt-req:
+    url: https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js
+    interval: 86400
+  yt-res:
+    url: https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js
+    interval: 86400
+  sp-json:
+    url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
+    interval: 86400
+  sp-proto:
+    url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
+    interval: 86400
+  rc-multi-res:
+    url: https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/revenuecat_multi.js
+    interval: 86400
+  rc-multi-hdr:
+    url: https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js
+    interval: 86400
+  sc-res:
+    url: https://raw.githubusercontent.com/Marol62926/MarScrpt/main/soundcloud.js
+    interval: 86400
+  pa-req:
+    url: https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/PicsArt.js
+    interval: 86400
+  tc-res:
+    url: https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/truecaller.js
+    interval: 86400
+  wk-res:
+    url: https://raw.githubusercontent.com/quocchienn/co_tien_khong/refs/heads/Module/WinkVipCrack.js
+    interval: 86400
+  am-res:
+    url: https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/AlightMotion.js
+    interval: 86400
+  doc-req:
+    url: https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/documents.js
+    interval: 86400
+  vc-res:
+    url: https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/vivacut.js
+    interval: 86400
