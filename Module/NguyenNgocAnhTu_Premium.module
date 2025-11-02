@@ -1,5 +1,5 @@
-#!name=⚡ Nguyễn Ngọc Anh Tú 🌸
-#!desc=✨ 📸 [Locket] • 🎶 [Spotify] • 📺 [YouTube] • 🎵 [SoundCloud] 🔥
+#!name=⚡ Nguyễn Ngọc Anh Tú 🌸 - Extended
+#!desc=✨ 11 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Truecaller + Wink + Alight Motion + Documents + Vivacut 🔥
 #!tag=📩 [Messenger](https://www.messenger.com/channel/NguyenNgocAnhTu.VN)
 #!homepage=🌐 [GitHub](https://github.com/z3rokaze/NguyenNgocAnhTu)
 #!system=ios,mac
@@ -26,10 +26,8 @@ AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT
 
 # ======================================== #
 # --- YouTube Premium (Optimized) ---
-# 👤 Author: Maasea (github.com/Maasea/sgmodule)
-# ⚡ Latest version: 2025/7/12 (PiP fix, Background Play)
-# 🎬 Lyric & caption translation, No Ads
-# 🚀 Performance: Fast processing, optimized timeout
+# 👤 Author: Maasea
+# ⚡ Latest version: 2025/7/12
 # ======================================== #
 youtube-request = type=http-request,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence|get_watch),requires-body=1,max-size=3145728,binary-body-mode=1,timeout=20,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js
 
@@ -37,34 +35,65 @@ youtube-response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.c
 
 # ======================================== #
 # --- Spotify Premium (Optimized) ---
-# 👤 Author: app2smile (github.com/app2smile/rules)
-# ⚡ Protobuf method, binary mode decoding
-# 🎵 No ads, unlimited skips, high quality
+# 👤 Author: app2smile
 # 📅 Last Updated: 2025-06-27
-# 🚀 Performance: Fast binary processing, optimized patterns
 # ======================================== #
 spotify-json = type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,timeout=15,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
 
 spotify-proto = type=http-response,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,timeout=25,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
 
 # ======================================== #
-# --- Locket Gold (Ultra Optimized) ---
-# 👤 Author: z3rokaze (Custom Script)
+# --- Locket Gold + VSCO Premium (Multi) ---
+# 👤 Author: z3rokaze (Universal Script)
 # 🔐 Premium Lifetime (2025-11-01 → 2099-12-31)
-# ⚡ Priority #1 for RevenueCat API
-# 🚀 Performance: Ultra-fast IIFE execution, optimized memory
+# 🎨 Supports: Locket Gold & VSCO Premium
+# ⚡ Smart User-Agent detection
 # ======================================== #
-locket-response = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/locket.js,requires-body=true,max-size=262144,timeout=15
+revenuecat-multi-response = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/revenuecat_multi.js,requires-body=true,max-size=262144,timeout=15
 
-locket-header = type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js,timeout=5
+revenuecat-multi-header = type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js,timeout=5
 
 # ======================================== #
 # --- SoundCloud Go+ ---
-# 👤 Author: Marol62926 (github.com/Marol62926/MarScrpt)
-# 🎵 Unlock SoundCloud Go+ features
-# 🚀 Performance: Fast response processing
+# 👤 Author: Marol62926
 # ======================================== #
 soundcloud-response = type=http-response,pattern=^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios,requires-body=1,max-size=262144,timeout=15,script-path=https://raw.githubusercontent.com/Marol62926/MarScrpt/main/soundcloud.js
+
+# ======================================== #
+# --- PicsArt Premium ---
+# 🎨 Photo editing premium
+# ======================================== #
+picsart-response = type=http-request,pattern=^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$,script-path=https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/PicsArt.js,requires-body=true,timeout=10
+
+# ======================================== #
+# --- Truecaller Premium ---
+# 📞 Caller ID & spam blocking
+# ======================================== #
+truecaller-response = type=http-response,pattern=^https:\/\/premium-(.+)\.truecaller\.com\/v\d\/(subscriptions|products\/apple),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/truecaller.js,timeout=10
+
+# ======================================== #
+# --- Wink (Meitu) VIP ---
+# 🎭 Face editing premium
+# ======================================== #
+wink-response = type=http-response,pattern=^https?:\/\/api-sub\.meitu\.com\/v2\/user\/vip_info_by_group\.json,requires-body=1,script-path=https://raw.githubusercontent.com/quocchienn/co_tien_khong/refs/heads/Module/WinkVipCrack.js,timeout=10
+
+# ======================================== #
+# --- Alight Motion Premium ---
+# 🎬 Video editing premium
+# ======================================== #
+alightmotion-response = type=http-response,pattern=^https:\/\/us-central1-alight-creative\.cloudfunctions\.net\/getAccountStatusAndLicenses$,script-path=https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/AlightMotion.js,requires-body=true,timeout=10
+
+# ======================================== #
+# --- Documents Premium ---
+# 📄 PDF editor premium
+# ======================================== #
+documents-request = type=http-request,pattern=^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/documents\/subscription\/refresh,requires-body=1,script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/documents.js,timeout=10
+
+# ======================================== #
+# --- Vivacut Premium ---
+# ✂️ Video editor premium
+# ======================================== #
+vivacut-response = type=http-response,pattern=^https:\/\/medi\.dxzzy321\.top\/api\/rest\/commerce\/integrate\/vip\/perform$,requires-body=1,script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/vivacut.js,timeout=10
 
 ################################
 #        [ Url Rewrite ]       #
@@ -94,7 +123,7 @@ soundcloud-response = type=http-response,pattern=^https:\/\/api-mobile\.soundclo
 
 [Header Rewrite]
 
-# RevenueCat (for Locket)
+# RevenueCat (for Locket + VSCO)
 ^https?://api.revenuecat.com/.+/(receipts$|subscribers/?(.*?)*$) header-del x-revenuecat-etag
 ^https?://api.revenuecat.com/.+/(receipts$|subscribers/?(.*?)*$) header-del X-RevenueCat-ETag
 
@@ -103,5 +132,5 @@ soundcloud-response = type=http-response,pattern=^https:\/\/api-mobile\.soundclo
 ################################
 
 [MITM]
-hostname = %APPEND% -redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com, spclient.wg.spotify.com, *-spclient.spotify.com, api.revenuecat.com, api-mobile.soundcloud.com
+hostname = %APPEND% -redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com, spclient.wg.spotify.com, *-spclient.spotify.com, api.revenuecat.com, api-mobile.soundcloud.com, api.picsart.com, premium*.truecaller.com, api-sub.meitu.com, us-central1-alight-creative.cloudfunctions.net, license.pdfexpert.com, medi.dxzzy321.top
 enable = true
