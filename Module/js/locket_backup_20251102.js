@@ -2,21 +2,21 @@
 // Locket Gold Premium - Optimized Version
 // ⚡ Performance: Fast & Smooth
 // 🔐 Lifetime Premium Unlock
-// 📅 Updated: 2025-11-02 (Safe Version)
 // ========================================
 
 (function() {
   'use strict';
   
-  // ========= Constants (Improved - Safe Changes Only) ========= //
-  const PURCHASE_DATE = "2025-11-01T00:00:00Z";       // ✅ Updated to recent date
-  const EXPIRES_DATE = "2099-12-31T23:59:59Z";        // ✅ Extended & unified
-  const PRODUCT_ID = "locket.premium.yearly";         // ⚠️ KEEP OLD - Working fine!
+  // ========= Constants (Pre-defined) ========= //
+  const SPECIFIC_DATE = "2025-07-18T00:00:00Z";
+  const EXPIRES_DATE = "2099-07-18T01:04:17Z";
+  const EXPIRES_DATE_LONG = "2099-12-18T01:04:17Z";
+  const PRODUCT_ID = "locket.premium.yearly";
   
   // ========= Mapping Configuration ========= //
   const APP_MAPPING = {
-    '%E8%BD%A6%E7%A5%A8%E7%A5%A8': ['vip+watch_vip'],
-    'Locket': ['Gold']
+    '%E8%BD%A6%E7%A5%A8%E7%A5%A8': ['vip+watch_vip', PRODUCT_ID],
+    'Locket': ['Gold', PRODUCT_ID]
   };
   
   // ========= Get User-Agent (Optimized) ========= //
@@ -54,35 +54,40 @@
     ownership_type: "PURCHASED",
     billing_issues_detected_at: null,
     period_type: "normal",
-    expires_date: EXPIRES_DATE,                    // ✅ Now consistent & longer
+    expires_date: EXPIRES_DATE,
     grace_period_expires_date: null,
     unsubscribe_detected_at: null,
-    original_purchase_date: PURCHASE_DATE,         // ✅ Updated date
-    purchase_date: PURCHASE_DATE,                  // ✅ Updated date
+    original_purchase_date: SPECIFIC_DATE,
+    purchase_date: SPECIFIC_DATE,
     store: "app_store"
   };
   
   const entitlementData = {
     grace_period_expires_date: null,
-    purchase_date: PURCHASE_DATE,                  // ✅ Updated date
-    product_identifier: PRODUCT_ID,                // ⚠️ Keep original format
-    expires_date: EXPIRES_DATE                     // ✅ Now same as subscription
+    purchase_date: SPECIFIC_DATE,
+    product_identifier: PRODUCT_ID,
+    expires_date: EXPIRES_DATE_LONG
   };
   
   // ========= Apply Mapping (Optimized Logic) ========= //
-  let entitlementKey = "Gold";  // Default
+  let matched = false;
   
   // Fast mapping lookup
   for (const key in APP_MAPPING) {
     if (ua.indexOf(key) !== -1) {
-      entitlementKey = APP_MAPPING[key][0];
+      const [entitlementKey, subscriptionKey] = APP_MAPPING[key];
+      responseObj.subscriber.subscriptions[subscriptionKey] = subscriptionData;
+      responseObj.subscriber.entitlements[entitlementKey] = entitlementData;
+      matched = true;
       break;
     }
   }
   
-  // Apply premium data (Simplified logic)
-  responseObj.subscriber.subscriptions[PRODUCT_ID] = subscriptionData;
-  responseObj.subscriber.entitlements[entitlementKey] = entitlementData;
+  // Default fallback (if no match)
+  if (!matched) {
+    responseObj.subscriber.subscriptions[PRODUCT_ID] = subscriptionData;
+    responseObj.subscriber.entitlements["Gold"] = entitlementData;
+  }
   
   // ========= Return Response (Fast stringify) ========= //
   $done({ body: JSON.stringify(responseObj) });
