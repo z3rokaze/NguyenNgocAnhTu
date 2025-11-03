@@ -2,11 +2,4 @@
 <project name="SportsBookingSystem" default="default" basedir=".">
     <description>Builds, tests, and runs the project SportsBookingSystem.</description>
     <import file="nbproject/build-impl.xml"/>
-    
-    <!-- Custom targets -->
-    <target name="run-main" depends="jar">
-        <java jar="${dist.jar}" fork="true">
-            <jvmarg line="${run.jvmargs}"/>
-        </java>
-    </target>
 </project>

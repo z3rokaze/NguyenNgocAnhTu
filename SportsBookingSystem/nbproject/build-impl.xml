@@ -33,8 +33,12 @@
     
     <target name="build" depends="jar"/>
     
-    <target name="run" depends="jar">
-        <java jar="${dist.jar}" fork="true"/>
+    <target name="run" depends="compile">
+        <java classname="Main" fork="true">
+            <classpath>
+                <pathelement path="${build.classes.dir}"/>
+            </classpath>
+        </java>
     </target>
     
     <target name="clean">
