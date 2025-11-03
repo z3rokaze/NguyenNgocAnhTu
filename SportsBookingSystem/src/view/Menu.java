@@ -3,6 +3,7 @@ package view;
 import manager.BookingManager;
 import manager.FacilityManager;
 import util.InputHandler;
+import util.Validator;
 
 /**
  * Main menu interface for the Sports Booking System
@@ -22,14 +23,14 @@ public class Menu {
     public void showMainMenu() {
         while (true) {
             clearScreen();
-            System.out.println("\n" + "=".repeat(60));
+            System.out.println("\n" + Validator.repeat("=", 60));
             System.out.println("    SPORTS BOOKING SYSTEM - MAIN MENU");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
             System.out.println("1.  Facility Management");
             System.out.println("2.  Booking Management");
             System.out.println("3.  View Statistics");
             System.out.println("0.  Exit");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
 
             int choice = InputHandler.getInt("Enter your choice: ", 0, 3);
 
@@ -60,16 +61,16 @@ public class Menu {
     private void showFacilityMenu() {
         while (true) {
             clearScreen();
-            System.out.println("\n" + "=".repeat(60));
+            System.out.println("\n" + Validator.repeat("=", 60));
             System.out.println("    FACILITY MANAGEMENT");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
             System.out.println("1.  View All Facilities");
             System.out.println("2.  View Available Facilities");
             System.out.println("3.  Add New Facility");
             System.out.println("4.  Update Facility Status");
             System.out.println("5.  Search Facilities by Type");
             System.out.println("0.  Back to Main Menu");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
 
             int choice = InputHandler.getInt("Enter your choice: ", 0, 5);
 
@@ -106,9 +107,9 @@ public class Menu {
     private void showBookingMenu() {
         while (true) {
             clearScreen();
-            System.out.println("\n" + "=".repeat(60));
+            System.out.println("\n" + Validator.repeat("=", 60));
             System.out.println("    BOOKING MANAGEMENT");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
             System.out.println("1.  Create New Booking");
             System.out.println("2.  View All Bookings");
             System.out.println("3.  View Active Bookings");
@@ -117,7 +118,7 @@ public class Menu {
             System.out.println("6.  Search Bookings by Phone Number");
             System.out.println("7.  View Bookings by Date");
             System.out.println("0.  Back to Main Menu");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
 
             int choice = InputHandler.getInt("Enter your choice: ", 0, 7);
 
@@ -162,14 +163,14 @@ public class Menu {
     private void showStatisticsMenu() {
         while (true) {
             clearScreen();
-            System.out.println("\n" + "=".repeat(60));
+            System.out.println("\n" + Validator.repeat("=", 60));
             System.out.println("    STATISTICS & REPORTS");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
             System.out.println("1.  View Revenue Statistics");
             System.out.println("2.  View Facility Summary");
             System.out.println("3.  View Booking Summary");
             System.out.println("0.  Back to Main Menu");
-            System.out.println("=".repeat(60));
+            System.out.println(Validator.repeat("=", 60));
 
             int choice = InputHandler.getInt("Enter your choice: ", 0, 3);
 

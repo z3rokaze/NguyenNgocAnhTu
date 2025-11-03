@@ -4,6 +4,7 @@ import model.Booking;
 import model.Facility;
 import model.TimeSlot;
 import util.InputHandler;
+import util.Validator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class BookingManager {
         // Display booking details and confirm
         System.out.println("\n=== BOOKING DETAILS ===");
         System.out.println(booking);
-        System.out.println("=".repeat(80));
+        System.out.println(Validator.repeat("=", 80));
 
         if (InputHandler.getConfirmation("\nConfirm booking?")) {
             bookings.add(booking);
@@ -112,10 +113,10 @@ public class BookingManager {
             return;
         }
 
-        System.out.println("=".repeat(80));
+        System.out.println(Validator.repeat("=", 80));
         for (Booking booking : bookings) {
             System.out.println(booking);
-            System.out.println("-".repeat(80));
+            System.out.println(Validator.repeat("-", 80));
         }
         System.out.println("Total bookings: " + bookings.size());
     }
@@ -132,10 +133,10 @@ public class BookingManager {
             return;
         }
 
-        System.out.println("=".repeat(80));
+        System.out.println(Validator.repeat("=", 80));
         for (Booking booking : activeBookings) {
             System.out.println(booking);
-            System.out.println("-".repeat(80));
+            System.out.println(Validator.repeat("-", 80));
         }
         System.out.println("Total active bookings: " + activeBookings.size());
     }
@@ -193,10 +194,10 @@ public class BookingManager {
             return;
         }
 
-        System.out.println("\n=".repeat(80));
+        System.out.println("\n" + Validator.repeat("=", 80));
         for (Booking booking : results) {
             System.out.println(booking);
-            System.out.println("-".repeat(80));
+            System.out.println(Validator.repeat("-", 80));
         }
         System.out.println("Found " + results.size() + " booking(s)");
     }
@@ -220,10 +221,10 @@ public class BookingManager {
             return;
         }
 
-        System.out.println("\n=".repeat(80));
+        System.out.println("\n" + Validator.repeat("=", 80));
         for (Booking booking : results) {
             System.out.println(booking);
-            System.out.println("-".repeat(80));
+            System.out.println(Validator.repeat("-", 80));
         }
         System.out.println("Found " + results.size() + " booking(s)");
     }
@@ -252,10 +253,10 @@ public class BookingManager {
         results.sort((b1, b2) -> Integer.compare(b1.getTimeSlot().getStartHour(), 
                                                   b2.getTimeSlot().getStartHour()));
 
-        System.out.println("\n=".repeat(80));
+        System.out.println("\n" + Validator.repeat("=", 80));
         for (Booking booking : results) {
             System.out.println(booking);
-            System.out.println("-".repeat(80));
+            System.out.println(Validator.repeat("-", 80));
         }
         System.out.println("Found " + results.size() + " booking(s)");
     }
@@ -304,11 +305,11 @@ public class BookingManager {
             }
         }
 
-        System.out.println("-".repeat(50));
+        System.out.println(Validator.repeat("-", 50));
         System.out.println("Total Bookings: " + bookings.size());
         System.out.println("Active Bookings: " + activeCount);
         System.out.println("Cancelled Bookings: " + cancelledCount);
         System.out.println("Total Revenue: $" + String.format("%.2f", totalRevenue));
-        System.out.println("-".repeat(50));
+        System.out.println(Validator.repeat("-", 50));
     }
 }

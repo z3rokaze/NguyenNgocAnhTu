@@ -10,6 +10,17 @@ import java.time.format.DateTimeParseException;
 public class Validator {
     
     /**
+     * Repeat a string n times (Java 8 compatible)
+     */
+    public static String repeat(String str, int times) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < times; i++) {
+            sb.append(str);
+        }
+        return sb.toString();
+    }
+    
+    /**
      * Validate phone number (10-11 digits)
      */
     public static boolean isValidPhoneNumber(String phone) {

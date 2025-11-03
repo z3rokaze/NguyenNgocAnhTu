@@ -70,11 +70,11 @@ public class FacilityManager {
             return;
         }
 
-        System.out.println("-".repeat(100));
+        System.out.println(Validator.repeat("-", 100));
         for (Facility facility : facilities) {
             System.out.println(facility);
         }
-        System.out.println("-".repeat(100));
+        System.out.println(Validator.repeat("-", 100));
         System.out.println("Total facilities: " + facilities.size());
     }
 
@@ -90,11 +90,11 @@ public class FacilityManager {
             return;
         }
 
-        System.out.println("-".repeat(100));
+        System.out.println(Validator.repeat("-", 100));
         for (Facility facility : available) {
             System.out.println(facility);
         }
-        System.out.println("-".repeat(100));
+        System.out.println(Validator.repeat("-", 100));
         System.out.println("Total available facilities: " + available.size());
     }
 
@@ -166,11 +166,11 @@ public class FacilityManager {
             return;
         }
 
-        System.out.println("\n" + "-".repeat(100));
+        System.out.println("\n" + Validator.repeat("-", 100));
         for (Facility facility : results) {
             System.out.println(facility);
         }
-        System.out.println("-".repeat(100));
+        System.out.println(Validator.repeat("-", 100));
         System.out.println("Found " + results.size() + " facility(ies)");
     }
 

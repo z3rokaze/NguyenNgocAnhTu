@@ -1,4 +1,5 @@
 import view.Menu;
+import util.Validator;
 
 /**
  * Main class - Entry point for Sports Booking System
@@ -14,9 +15,9 @@ import view.Menu;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("\n" + "=".repeat(60));
+        System.out.println("\n" + Validator.repeat("=", 60));
         System.out.println("    WELCOME TO SPORTS BOOKING SYSTEM");
-        System.out.println("=".repeat(60));
+        System.out.println(Validator.repeat("=", 60));
         System.out.println("\nInitializing system...");
         
         try {
