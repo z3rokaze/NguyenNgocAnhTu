@@ -17,10 +17,10 @@ Main Class: Main
 JDK: 1.8 hoac cao hon
 Source Level: 1.8
 
-⚡ CHAY TU COMMAND LINE:
+⚡ CHI CHAY TREN NETBEANS:
 ────────────────────────────────────────────────────────────────
-Linux/Mac:  cd /workspace/SportsBookingSystem && ./run.sh
-Windows:    cd SportsBookingSystem && run.bat
+Khong co script command line.
+Vui long mo project trong NetBeans 13 de chay.
 
 📚 CAC FILE HUONG DAN:
 ────────────────────────────────────────────────────────────────

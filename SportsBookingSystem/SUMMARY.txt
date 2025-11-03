@@ -53,11 +53,10 @@ OPTION 1: MO TRONG NETBEANS 13 (KHUYẾN NGHỊ)
 4. Click "Open Project"
 5. Nhan F6 de chay
 
-OPTION 2: COMMAND LINE
-----------------------
-cd /workspace/SportsBookingSystem
-./run.sh        # Linux/Mac
-run.bat         # Windows
+CHI CHAY TREN NETBEANS 13
+-------------------------
+Khong co script command line.
+Chi mo trong NetBeans de chay.
 
 ═══════════════════════════════════════════════════════════════════
 

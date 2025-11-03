@@ -18,14 +18,10 @@ YEU CAU:
 CACH CHAY:
 ----------
 
-1. Trong NetBeans 13:
+Trong NetBeans 13:
    - File > Open Project
    - Chon folder "SportsBookingSystem"
    - Nhan F6 hoac Run button
-
-2. Tu command line:
-   Linux/Mac:  ./run.sh
-   Windows:    run.bat
 
 TINH NANG:
 ----------
