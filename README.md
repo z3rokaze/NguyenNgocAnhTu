@@ -1,6 +1,6 @@
 <div align="center">
 
-<!-- Animated Header Wave  -->
+<!-- Animated Header Wave -->
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20,24,25&height=180&section=header&text=Premium%20Unlocker&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=35&desc=YouTube%20•%20Spotify%20•%20Locket%20Gold&descAlignY=55&descSize=20"/>
 
 <br>
