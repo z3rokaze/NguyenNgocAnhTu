@@ -1,17 +1,18 @@
 // ========================================
-// Locket Gold Premium - Optimized Version
+// Locket Gold Premium - Enhanced Version
 // ⚡ Performance: Fast & Smooth
 // 🔐 Lifetime Premium Unlock
-// 📅 Updated: 2025-11-02 (Safe Version)
+// 📅 Version: 1.1 (2025-11-15) - Enhanced
+// 👤 Author: z3rokaze
 // ========================================
 
 (function() {
   'use strict';
   
-  // ========= Constants (Improved - Safe Changes Only) ========= //
-  const PURCHASE_DATE = "2025-07-18T00:00:00Z";       // ✅ Updated to recent date
-  const EXPIRES_DATE = "2099-12-31T23:59:59Z";        // ✅ Extended & unified
-  const PRODUCT_ID = "locket.premium.yearly";         // ⚠️ KEEP OLD - Working fine!
+  // ========= Constants (Updated) ========= //
+  const PURCHASE_DATE = "2025-07-18T00:00:00Z";       // ✅ Current date
+  const EXPIRES_DATE = "2099-12-31T23:59:59Z";        // ✅ Lifetime
+  const PRODUCT_ID = "locket.premium.yearly";         // ✅ Stable product ID
   
   // ========= Mapping Configuration ========= //
   const APP_MAPPING = {
@@ -23,12 +24,12 @@
   const headers = $request.headers;
   const ua = headers["User-Agent"] || headers["user-agent"] || "";
   
-  // ========= Parse Response Body (Fast Parse) ========= //
+  // ========= Parse Response Body (Enhanced Error Handling) ========= //
   let responseObj;
   try {
     responseObj = JSON.parse($response.body);
     
-    // Ensure structure exists (Fast initialization)
+    // Ensure structure exists (Complete initialization)
     if (!responseObj.subscriber) {
       responseObj.subscriber = {};
     }
@@ -39,11 +40,13 @@
       responseObj.subscriber.entitlements = {};
     }
   } catch (error) {
-    // Fast error recovery
+    // Complete error recovery with full structure
     responseObj = {
       subscriber: {
         subscriptions: {},
-        entitlements: {}
+        entitlements: {},
+        original_app_user_id: "",
+        original_application_version: ""
       }
     };
   }
