@@ -2,7 +2,14 @@
 # 16 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot | Original Sources
 # https://github.com/z3rokaze/NguyenNgocAnhTu
 
-hostname=*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com,spclient.wg.spotify.com,*-spclient.spotify.com,api.revenuecat.com,api.picsart.com,api-mobile.soundcloud.com,us-central1-alight-creative.cloudfunctions.net,api-account.kinemasters.com,lapi.photomath.net,photos.adobe.io,app.algoriddim.com,api.calm.com,api.busuu.com
+hostname=*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com,spclient.wg.spotify.com,*-spclient.spotify.com,api.revenuecat.com,api.picsart.c*,api.meiease.c*,api-mobile.soundcloud.com,us-central1-alight-creative.cloudfunctions.net,api-account.kinemasters.com,lapi.photomath.net,photos.adobe.io,app.algoriddim.com,api.calm.com,api.busuu.com
+
+# Spotify Ads Block
+host-suffix, audio-ak-spotify-com.akamaized.net, reject
+host-suffix, audio4-ak-spotify-com.akamaized.net, reject
+host-suffix, heads-ak-spotify-com.akamaized.net, reject
+host-suffix, heads4-ak-spotify-com.akamaized.net, reject
+host-keyword, spotify-ads, reject
 
 # YouTube Ad Block
 ^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad url reject-200
@@ -30,7 +37,7 @@ hostname=*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com
 ^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers) url script-request-header https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js
 
 # PicsArt - NobyDa (ORIGINAL)
-^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$ url script-request-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js
+^https:\/\/api\.(picsart|meiease)\.c(n|om)\/shop\/subscription\/(validate|apple\/purchases) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js
 
 # SoundCloud Go+ - sbunkov (Updated 2025-12-23)
 ^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios url script-response-body https://raw.githubusercontent.com/sbunkov/shadowrocket-configuration/main/scripts/soundcloud.js

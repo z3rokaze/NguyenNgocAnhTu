@@ -5,6 +5,15 @@ homepage: https://github.com/z3rokaze/NguyenNgocAnhTu
 icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
 
 rules:
+  # Spotify Ads Block
+  - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,REJECT
+  - DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,REJECT
+  - DOMAIN-SUFFIX,heads-ak-spotify-com.akamaized.net,REJECT
+  - DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,REJECT
+  - DOMAIN,spclient.wg.spotify.com,DIRECT
+  - DOMAIN-KEYWORD,spotify-ads,REJECT
+  - DOMAIN-KEYWORD,spotify.com/ad,REJECT
+  # YouTube Ads Block
   - AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
   - AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
@@ -17,7 +26,8 @@ http:
     - "spclient.wg.spotify.com"
     - "*-spclient.spotify.com"
     - "api.revenuecat.com"
-    - "api.picsart.com"
+    - "api.picsart.c*"
+    - "api.meiease.c*"
     - "api-mobile.soundcloud.com"
     - "us-central1-alight-creative.cloudfunctions.net"
     - "api-account.kinemasters.com"
@@ -80,9 +90,9 @@ http:
       require-body: false
       timeout: 5
     # PicsArt - NobyDa (ORIGINAL)
-    - match: ^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$
-      name: pa-req
-      type: request
+    - match: ^https:\/\/api\.(picsart|meiease)\.c(n|om)\/shop\/subscription\/(validate|apple\/purchases)
+      name: pa-res
+      type: response
       require-body: true
       timeout: 10
       max-size: 131072
@@ -165,7 +175,7 @@ script-providers:
   rc-multi-hdr:
     url: https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js
     interval: 86400
-  pa-req:
+  pa-res:
     url: https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js
     interval: 86400
   sc-res:

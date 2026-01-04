@@ -11,6 +11,15 @@ dns-server=system
 ipv6=false
 
 [Rule]
+# Spotify Ads Block
+DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,REJECT
+DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,REJECT
+DOMAIN-SUFFIX,heads-ak-spotify-com.akamaized.net,REJECT
+DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,REJECT
+DOMAIN,spclient.wg.spotify.com,DIRECT
+DOMAIN-KEYWORD,spotify-ads,REJECT
+DOMAIN-KEYWORD,spotify.com/ad,REJECT
+# YouTube Ads Block
 AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
 AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
@@ -29,7 +38,7 @@ rc-res=type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts
 rc-hdr=type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js,timeout=5
 
 # PicsArt - NobyDa (ORIGINAL)
-pa-req=type=http-request,pattern=^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js,requires-body=true,max-size=131072,timeout=10
+pa-res=type=http-response,pattern=^https:\/\/api\.(picsart|meiease)\.c(n|om)\/shop\/subscription\/(validate|apple\/purchases),script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js,requires-body=true,max-size=131072,timeout=10
 
 # SoundCloud Go+ - sbunkov (Updated 2025-12-23)
 sc-res=type=http-response,pattern=^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios,requires-body=1,max-size=262144,timeout=15,script-path=https://raw.githubusercontent.com/sbunkov/shadowrocket-configuration/main/scripts/soundcloud.js
@@ -70,4 +79,4 @@ bussu-res=type=http-response,pattern=^https:\/\/api\.busuu\.com\/users\/me,scrip
 ^https?://api\.revenuecat\.com/.+/(receipts$|subscribers/?(.*?)*$) header-del X-RevenueCat-ETag
 
 [MITM]
-hostname=%APPEND% -redirector*.googlevideo.com,*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com,spclient.wg.spotify.com,*-spclient.spotify.com,api.revenuecat.com,api.picsart.com,api-mobile.soundcloud.com,us-central1-alight-creative.cloudfunctions.net,api-account.kinemasters.com,lapi.photomath.net,photos.adobe.io,app.algoriddim.com,api.calm.com,api.busuu.com
+hostname=%APPEND% -redirector*.googlevideo.com,*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com,spclient.wg.spotify.com,*-spclient.spotify.com,api.revenuecat.com,api.picsart.c*,api.meiease.c*,api-mobile.soundcloud.com,us-central1-alight-creative.cloudfunctions.net,api-account.kinemasters.com,lapi.photomath.net,photos.adobe.io,app.algoriddim.com,api.calm.com,api.busuu.com
