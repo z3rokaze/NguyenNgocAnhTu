@@ -1,8 +1,8 @@
 # ⚡ Anh Tú Premium - Quantumult X
-# 19 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot + Structured + Splice + Facetune | Original Sources
+# 26 Apps: Locket + YouTube + Spotify + SoundCloud + PicsArt + Emby + Alight Motion + KineMaster + Photomath + Lightroom + Photoshop + Djay + Calm + Bussu + VSCO + Mojo + Widgetsmith + Headspace + Funimate + Reface + Unfold + HTTPBot + 1Blocker + Structured + Splice + Facetune | v2.3.1 (2026-01-16)
 # https://github.com/z3rokaze/NguyenNgocAnhTu
 
-hostname=*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com,spclient.wg.spotify.com,*-spclient.spotify.com,api.revenuecat.com,api.picsart.c*,api.meiease.c*,api-mobile.soundcloud.com,us-central1-alight-creative.cloudfunctions.net,api-account.kinemasters.com,lapi.photomath.net,photos.adobe.io,app.algoriddim.com,api.calm.com,api.busuu.com
+hostname=*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com,spclient.wg.spotify.com,*-spclient.spotify.com,api.revenuecat.com,api.picsart.c*,api.meiease.c*,api-mobile.soundcloud.com,us-central1-alight-creative.cloudfunctions.net,api-account.kinemasters.com,lapi.photomath.net,photos.adobe.io,app.algoriddim.com,api.calm.com,api.busuu.com,vsco.co,api.mojo-app.com,widgetsmith.com,mb3admin.com,api.prod.headspace.com,api.funimate.com,lcs-mobile-cops.adobe.io,api.reface.video,api.unfold.app
 
 # Spotify Ads Block
 host-suffix, audio-ak-spotify-com.akamaized.net, reject
@@ -62,3 +62,30 @@ host-keyword, spotify-ads, reject
 
 # Bussu - iSteal-it
 ^https:\/\/api\.busuu\.com\/users\/me url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/bussu.json
+
+# VSCO X - iSteal-it
+^https:\/\/vsco\.co\/api\/subscriptions\/2\.1\/user-subscriptions url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/vsco.json
+
+# Mojo Pro - iSteal-it
+^https:\/\/api\.mojo-app\.com\/v\d\/subscription url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/mojo.json
+
+# Widgetsmith Premium - iSteal-it
+^https:\/\/widgetsmith\.com\/api\/subscription url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/widgetsmith.json
+
+# Emby Premiere - chavyleung
+^https?:\/\/mb3admin\.com\/admin\/service\/registration\/validateDevice url script-response-body https://raw.githubusercontent.com/chavyleung/scripts/master/emby/emby.js
+
+# Headspace Premium - iSteal-it
+^https:\/\/api\.prod\.headspace\.com\/.*\/user-subscriptions url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/headspace.json
+
+# Funimate Pro - iSteal-it
+^https:\/\/api\.funimate\.com\/users\/me url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/Funimate.json
+
+# Photoshop Express - iSteal-it
+^https:\/\/lcs-mobile-cops\.adobe\.io\/mobile_profile url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/Photoshop.json
+
+# Reface Premium - iSteal-it
+^https:\/\/api\.reface\.video\/api\/reface\/v1\/iosSubscription url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/reface.json
+
+# Unfold Premium - iSteal-it
+^https:\/\/api\.unfold\.app\/v1\/ios\/receipts url script-response-body https://raw.githubusercontent.com/iSteal-it/script/main/unfoldtest.json

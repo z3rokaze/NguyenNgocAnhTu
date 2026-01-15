@@ -1,5 +1,5 @@
 name: ⚡ Anh Tú Premium - Stash
-desc: 19 Apps - Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot + Structured + Splice + Facetune | Original Sources
+desc: 26 Apps - Locket + YouTube + Spotify + SoundCloud + PicsArt + Emby + Alight Motion + KineMaster + Photomath + Lightroom + Photoshop + Djay + Calm + Bussu + VSCO + Mojo + Widgetsmith + Headspace + Funimate + Reface + Unfold + HTTPBot + 1Blocker + Structured + Splice + Facetune | v2.3.1 (2026-01-16)
 author: Nguyễn Ngọc Anh Tú
 homepage: https://github.com/z3rokaze/NguyenNgocAnhTu
 icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
@@ -36,6 +36,15 @@ http:
     - "app.algoriddim.com"
     - "api.calm.com"
     - "api.busuu.com"
+    - "vsco.co"
+    - "api.mojo-app.com"
+    - "widgetsmith.com"
+    - "mb3admin.com"
+    - "api.prod.headspace.com"
+    - "api.funimate.com"
+    - "lcs-mobile-cops.adobe.io"
+    - "api.reface.video"
+    - "api.unfold.app"
   url-rewrite:
     - ^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad - reject-200
     - ^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads - reject-200
@@ -77,7 +86,7 @@ http:
       timeout: 10
       max-size: 0
       binary-mode: true
-    # RevenueCat Multi - z3rokaze
+    # RevenueCat Multi - z3rokaze (Locket+VSCO+Mojo+HTTPBot+1Blocker+Structured+Splice+Facetune)
     - match: ^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$)
       name: rc-multi-res
       type: response
@@ -152,6 +161,69 @@ http:
       require-body: true
       timeout: 10
       max-size: 131072
+    # VSCO X - iSteal-it
+    - match: ^https:\/\/vsco\.co\/api\/subscriptions\/2\.1\/user-subscriptions
+      name: vsco-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Mojo Pro - iSteal-it
+    - match: ^https:\/\/api\.mojo-app\.com\/v\d\/subscription
+      name: mojo-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Widgetsmith Premium - iSteal-it
+    - match: ^https:\/\/widgetsmith\.com\/api\/subscription
+      name: ws-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Emby Premiere - chavyleung
+    - match: ^https?:\/\/mb3admin\.com\/admin\/service\/registration\/validateDevice
+      name: emby-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Headspace Premium - iSteal-it
+    - match: ^https:\/\/api\.prod\.headspace\.com\/.*\/user-subscriptions
+      name: hs-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Funimate Pro - iSteal-it
+    - match: ^https:\/\/api\.funimate\.com\/users\/me
+      name: fun-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Photoshop Express - iSteal-it
+    - match: ^https:\/\/lcs-mobile-cops\.adobe\.io\/mobile_profile
+      name: ps-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Reface Premium - iSteal-it
+    - match: ^https:\/\/api\.reface\.video\/api\/reface\/v1\/iosSubscription
+      name: rf-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Unfold Premium - iSteal-it
+    - match: ^https:\/\/api\.unfold\.app\/v1\/ios\/receipts
+      name: uf-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
 
 script-providers:
   yt-req:
@@ -201,4 +273,31 @@ script-providers:
     interval: 86400
   bussu-res:
     url: https://raw.githubusercontent.com/iSteal-it/script/main/bussu.json
+    interval: 86400
+  vsco-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/vsco.json
+    interval: 86400
+  mojo-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/mojo.json
+    interval: 86400
+  ws-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/widgetsmith.json
+    interval: 86400
+  emby-res:
+    url: https://raw.githubusercontent.com/chavyleung/scripts/master/emby/emby.js
+    interval: 86400
+  hs-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/headspace.json
+    interval: 86400
+  fun-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/Funimate.json
+    interval: 86400
+  ps-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/Photoshop.json
+    interval: 86400
+  rf-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/reface.json
+    interval: 86400
+  uf-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/unfoldtest.json
     interval: 86400

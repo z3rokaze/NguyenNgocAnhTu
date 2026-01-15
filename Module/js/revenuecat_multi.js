@@ -1,19 +1,19 @@
 // ========================================
 // RevenueCat Multi-App Premium Unlocker
 // ⚡ Performance: Ultra-Fast & Universal
-// 🔐 Supports: Locket + VSCO + Mojo + HTTPBot + 1Blocker
-// 📅 Version: 1.4 (2025-01-04) - Integrated
+// 🔐 Supports: Locket, VSCO, Mojo, HTTPBot, 1Blocker, Structured, Splice, Facetune
+// 📅 Version: 2.1 (2026-01-15)
 // 👤 Author: z3rokaze
 // ========================================
 
 (function () {
   'use strict';
 
-  // ========= Constants (Updated) ========= //
-  const PURCHASE_DATE = "2025-01-04T00:00:00Z";
+  // ========= Constants ========= //
+  const PURCHASE_DATE = "2026-01-15T00:00:00Z";
   const EXPIRES_DATE = "2099-12-31T23:59:59Z";
 
-  // ========= App Configurations ========= //
+  // ========= App Configurations (Verified Working) ========= //
   const APP_CONFIGS = {
     'Locket': {
       entitlement: 'Gold',
@@ -34,6 +34,18 @@
     '1Blocker': {
       entitlement: 'premium',
       productId: 'blocker.ios.subscription.yearly'
+    },
+    'Structured': {
+      entitlement: 'pro',
+      productId: 'structured.pro.yearly'
+    },
+    'Splice': {
+      entitlement: 'premium',
+      productId: 'splice.subscription.yearly'
+    },
+    'Facetune': {
+      entitlement: 'facetune.premium',
+      productId: 'facetune.subscription.yearly'
     }
   };
 
@@ -41,22 +53,14 @@
   const headers = $request.headers;
   const ua = headers["User-Agent"] || headers["user-agent"] || "";
 
-  // ========= Parse Response (Enhanced Error Handling) ========= //
+  // ========= Parse Response ========= //
   let responseObj;
   try {
     responseObj = JSON.parse($response.body);
-    // Ensure structure exists
-    if (!responseObj.subscriber) {
-      responseObj.subscriber = {};
-    }
-    if (!responseObj.subscriber.subscriptions) {
-      responseObj.subscriber.subscriptions = {};
-    }
-    if (!responseObj.subscriber.entitlements) {
-      responseObj.subscriber.entitlements = {};
-    }
+    if (!responseObj.subscriber) responseObj.subscriber = {};
+    if (!responseObj.subscriber.subscriptions) responseObj.subscriber.subscriptions = {};
+    if (!responseObj.subscriber.entitlements) responseObj.subscriber.entitlements = {};
   } catch (error) {
-    // Fallback with complete structure
     responseObj = {
       subscriber: {
         subscriptions: {},
@@ -67,8 +71,8 @@
     };
   }
 
-  // ========= Base Subscription Data ========= //
-  const createSubscription = (productId) => ({
+  // ========= Helper Functions ========= //
+  const createSubscription = () => ({
     is_sandbox: false,
     ownership_type: "PURCHASED",
     billing_issues_detected_at: null,
@@ -88,19 +92,19 @@
     expires_date: EXPIRES_DATE
   });
 
-  // ========= Detect App & Apply Config (Enhanced) ========= //
+  // ========= Detect App & Apply Config ========= //
   let appDetected = false;
 
   if (ua.includes('Locket')) {
     const config = APP_CONFIGS['Locket'];
-    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
     responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
     appDetected = true;
   }
   else if (ua.includes('VSCO')) {
     const config = APP_CONFIGS['VSCO'];
     config.products.forEach(productId => {
-      responseObj.subscriber.subscriptions[productId] = createSubscription(productId);
+      responseObj.subscriber.subscriptions[productId] = createSubscription();
     });
     config.entitlements.forEach(entKey => {
       responseObj.subscriber.entitlements[entKey] = createEntitlement(config.products[0]);
@@ -109,31 +113,48 @@
   }
   else if (ua.includes('Mojo') || ua.includes('mojo')) {
     const config = APP_CONFIGS['Mojo'];
-    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
     responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
     appDetected = true;
   }
   else if (ua.includes('HTTPBot')) {
     const config = APP_CONFIGS['HTTPBot'];
-    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
     responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
     appDetected = true;
   }
   else if (ua.includes('1Blocker') || ua.includes('blocker')) {
     const config = APP_CONFIGS['1Blocker'];
-    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
+    responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
+    appDetected = true;
+  }
+  else if (ua.includes('Structured')) {
+    const config = APP_CONFIGS['Structured'];
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
+    responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
+    appDetected = true;
+  }
+  else if (ua.includes('Splice')) {
+    const config = APP_CONFIGS['Splice'];
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
+    responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
+    appDetected = true;
+  }
+  else if (ua.includes('Facetune')) {
+    const config = APP_CONFIGS['Facetune'];
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
     responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
     appDetected = true;
   }
 
-  // Default fallback: Locket (if no app detected)
+  // Default fallback
   if (!appDetected) {
     const config = APP_CONFIGS['Locket'];
-    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription();
     responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
   }
 
-  // ========= Return Response ========= //
   $done({ body: JSON.stringify(responseObj) });
 
 })();

@@ -2,7 +2,7 @@
 // RevenueCat ETag Header Remover - Enhanced
 // ⚡ Performance: Ultra Fast
 // 🔐 Remove caching headers for RevenueCat apps
-// 📅 Version: 1.3 (2025-12-27)
+// 📅 Version: 1.5 (2026-01-15)
 // 👤 Author: z3rokaze
 // ========================================
 
